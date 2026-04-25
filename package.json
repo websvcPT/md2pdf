@@ -1,0 +1,170 @@
+{
+  "name": "md2pdf-converter",
+  "displayName": "MD2PDF Converter",
+  "description": "Generate PDF files from Markdown documents with configurable headers and footers.",
+  "version": "1.0.2",
+  "publisher": "WebSVC",
+  "icon": "media/icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/WebsvcPT/md2pdf.git"
+  },
+  "license": "MIT",
+  "changeLog": "https://github.com/WebsvcPT/md2pdf/blob/master/CHANGELOG.md",
+  "engines": {
+    "vscode": "^1.95.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Other"
+  ],
+  "keywords": [
+    "markdown",
+    "pdf",
+    "export",
+    "front matter",
+    "md2pdf",
+    "MD2PDF Converter",
+    "md2pdf-converter",
+    "markdown to pdf",
+    "markdown export",
+    "markdown pdf generator",
+    "markdown pdf converter",
+    "markdown pdf extension",
+    "markdown pdf vscode"
+  ],
+  "main": "./dist/extension.js",
+  "activationEvents": [
+    "onCommand:md2pdf-converter.exportToPdf",
+    "onCommand:md2pdf-converter.exportToPdfAs"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "md2pdf-converter.exportToPdf",
+        "title": "Export Markdown to PDF",
+        "category": "MD2PDF Converter"
+      },
+      {
+        "command": "md2pdf-converter.exportToPdfAs",
+        "title": "Export Markdown to PDF as ...",
+        "category": "MD2PDF Converter"
+      }
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "md2pdf-converter.exportToPdf",
+          "when": "resourceExtname == .md",
+          "group": "navigation@100"
+        },
+        {
+          "command": "md2pdf-converter.exportToPdfAs",
+          "when": "resourceExtname == .md",
+          "group": "navigation@101"
+        }
+      ],
+      "editor/context": [
+        {
+          "command": "md2pdf-converter.exportToPdf",
+          "when": "editorLangId == markdown",
+          "group": "navigation@100"
+        },
+        {
+          "command": "md2pdf-converter.exportToPdfAs",
+          "when": "editorLangId == markdown",
+          "group": "navigation@101"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "MD2PDF Converter",
+      "properties": {
+        "md2pdf-converter.browserExecutablePath": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "Optional absolute path to a Chrome, Edge, or Chromium executable used for PDF generation."
+        },
+        "md2pdf-converter.page.format": {
+          "type": "string",
+          "default": "A4",
+          "enum": [
+            "A3",
+            "A4",
+            "A5",
+            "Legal",
+            "Letter",
+            "Tabloid"
+          ],
+          "description": "PDF paper format."
+        },
+        "md2pdf-converter.page.margin.top": {
+          "type": "string",
+          "default": "20mm",
+          "description": "Top page margin."
+        },
+        "md2pdf-converter.page.margin.right": {
+          "type": "string",
+          "default": "15mm",
+          "description": "Right page margin."
+        },
+        "md2pdf-converter.page.margin.bottom": {
+          "type": "string",
+          "default": "20mm",
+          "description": "Bottom page margin."
+        },
+        "md2pdf-converter.page.margin.left": {
+          "type": "string",
+          "default": "15mm",
+          "description": "Left page margin."
+        },
+        "md2pdf-converter.header.left": {
+          "type": "string",
+          "default": "{{title}}",
+          "description": "Default header content for the left section."
+        },
+        "md2pdf-converter.header.center": {
+          "type": "string",
+          "default": "",
+          "description": "Default header content for the center section."
+        },
+        "md2pdf-converter.header.right": {
+          "type": "string",
+          "default": "Page {{pageNumber}} / {{totalPages}}",
+          "description": "Default header content for the right section."
+        },
+        "md2pdf-converter.footer.left": {
+          "type": "string",
+          "default": "{{fileName}}",
+          "description": "Default footer content for the left section."
+        },
+        "md2pdf-converter.footer.center": {
+          "type": "string",
+          "default": "",
+          "description": "Default footer content for the center section."
+        },
+        "md2pdf-converter.footer.right": {
+          "type": "string",
+          "default": "{{generatedAt}}",
+          "description": "Default footer content for the right section."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "build": "node ./esbuild.mjs",
+    "test:unit": "node --test ./test/unit/*.test.js",
+    "test:extension": "node ./test/runTest.js",
+    "test": "npm run build && npm run test:unit && npm run test:extension"
+  },
+  "dependencies": {
+    "gray-matter": "4.0.3",
+    "highlight.js": "11.11.1",
+    "markdown-it": "14.1.1",
+    "puppeteer-core": "24.42.0"
+  },
+  "devDependencies": {
+    "@vscode/test-electron": "2.5.2",
+    "esbuild": "0.28.0"
+  }
+}
