@@ -2,7 +2,7 @@
   "name": "md2pdf-converter",
   "displayName": "MD2PDF Converter",
   "description": "Generate PDF files from Markdown documents with configurable headers and footers.",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "publisher": "WebSVC",
   "icon": "media/icon.png",
   "repository": {
@@ -152,6 +152,7 @@
     }
   },
   "scripts": {
+    "build:vsix": "npx @vscode/vsce package",
     "build": "node ./esbuild.mjs",
     "test:unit": "node --test ./test/unit/*.test.js",
     "test:extension": "node ./test/runTest.js",
