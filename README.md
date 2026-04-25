@@ -4,6 +4,11 @@
 
 **MD2PDF Converter** is a Visual Studio Code extension that exports Markdown documents to PDF using a local Chrome, Edge, or Chromium installation.
 
+**Buy me a coffee**
+
+If you'd like to thank me, you can buy me a coffee. Coffee is never too much :)
+
+https://www.buymeacoffee.com/websvc
 
 ## Features
 
